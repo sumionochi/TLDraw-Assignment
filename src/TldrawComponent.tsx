@@ -22,14 +22,14 @@ export default function TldrawComponent({ count }: TldrawComponentProps) {
         id: helloWorldShapeId,
         type: "text",
         x: 50,
-        y: 50,
+        y: 150,
         props: {
           text: `Generated ${count} items in Timeline`,
         },
       });
 
       const baseX = 100;
-      const baseY = 250;
+      const baseY = 400;
       const spacing = 250;
       const lineWidth = Math.max(0, (count - 1) * spacing);
       const lineHeight = 50;
@@ -76,8 +76,8 @@ export default function TldrawComponent({ count }: TldrawComponentProps) {
       for (let i = 0; i < count; i++) {
         const isOdd = i % 2 !== 0;
 
-        const subheadingY = isOdd ? baseY - 60 : baseY + 200;
-        const descriptionY = isOdd ? baseY - 100 : baseY + 150;
+        const subheadingY = isOdd ? baseY - 120 : baseY + 200;
+        const descriptionY = isOdd ? baseY - 80 : baseY + 150;
         const yOffset = isOdd ? -10 : 60;
 
         const lineShapeId = createShapeId();
@@ -126,7 +126,7 @@ export default function TldrawComponent({ count }: TldrawComponentProps) {
   }, [count, editor]);
 
   return (
-    <div style={{ position: "fixed", width: "100%", height: "100%" }}>
+    <div style={{ position: "fixed", width: '100vw', height: "95vh" }}>
       <Tldraw
         hideUi={false}
         onMount={(editor) => {

@@ -6,7 +6,10 @@ import Navbar from "./components/Navbar";
 
 export default function App() {
   const [count, setCount] = useState<number>(0);
-
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(true);
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
   const handleGenerate = (newCount: number) => {
     setCount(newCount);
     console.log("Setting count:", newCount);
@@ -14,9 +17,9 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar toggleSidebar={toggleSidebar} />
       <div className="content-container">
-        <Sidebar onGenerate={handleGenerate} itemCount={count} />
+        {isSidebarVisible && <Sidebar onGenerate={handleGenerate} itemCount={count} />}
         <TldrawComponent count={count} />
       </div>
     </div>
