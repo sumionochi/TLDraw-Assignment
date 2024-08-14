@@ -7,7 +7,7 @@ interface NavbarProps {
 function Navbar({ toggleSidebar }: NavbarProps) {
   return (
     <nav className="navbar">
-      <a href="#"><img src="public/logo.png" alt="Logo" /></a>
+      <a href="#"><img src="./src/assets/logo.png" alt="Logo" /></a>
       <p className="navbarText">Create Timeline Slide</p>
       <div className="navbarUser">
         <button className="navbarButton">Export to Google Slides</button>
