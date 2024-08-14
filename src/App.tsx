@@ -14,10 +14,10 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar/>
-      <div className="">
+      <Navbar />
+      <div className="content-container">
+        <Sidebar onGenerate={handleGenerate} itemCount={count} />
         <TldrawComponent count={count} />
-        <Sidebar onGenerate={handleGenerate} />
       </div>
     </div>
   );
