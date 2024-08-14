@@ -2,5 +2,161 @@
 @import url("tldraw/tldraw.css");
 
 body {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border-bottom: 1px solid white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 12;
+  position: relative;
+}
+
+.navbarText {
+  margin: 0;
+  font-size: 1.2rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.navbarUser{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarButton {
+  margin-right: 1rem;
+  padding: 0.7rem 1rem;
+  background-color: rgb(149,135,233);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navbarButton:hover {
+  background-color: rgb(116, 105, 177);
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #333;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:100;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  padding: 1rem;
+  padding-top: 4.5rem;
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.sidebar div{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar div p {
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+.sidebar textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  box-shadow: none; /* Remove default browser shadow */
+  outline: none; /* Remove default outline */
+  font-size: 1rem;
+}
+
+.sideBarButton {
+  margin-right: 1rem;
+  padding: 0.7rem 1rem;
+  background-color: rgb(149,135,233);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.sideBarButton:hover {
+  background-color: rgb(116, 105, 177);
+}
+
+.options label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.get-options-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5b8def;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* TldrawComponent styles */
+.tldraw-container {
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.tldraw-wrapper {
+  width: 100%;
+  height: calc(100% - 40px);
+  border: 1px solid #ddd;
+  background-color: #fff;
 }

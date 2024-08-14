@@ -1,37 +1,47 @@
-import { Tldraw, createShapeId } from "tldraw";
+import { Tldraw, createShapeId, Editor } from "tldraw";
 import "tldraw/tldraw.css";
-import {useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function TldrawComponent() {
-  const [itemCount, setItemCount] = useState(0);
+interface TldrawComponentProps {
+  count: number;
+}
 
-  const handleGenerate = (count : number) => {
-    console.log(count);
-  }
+
+export default function TldrawComponent({ count }: TldrawComponentProps) {
+  const editorRef = useRef<Editor | null>(null);
+
+  useEffect(() => {
+
+    if (editorRef.current) {
+      console.log("Items to generate:", count);
+
+      const helloWorldShapeId = createShapeId();
+      editorRef.current.createShape({
+        id: helloWorldShapeId,
+        type: "text",
+        x: 200,
+        y: 200,
+        props: {
+          text: `Generated ${count} items`,
+        },
+      });
+
+      return () => {
+        editorRef.current?.deleteShape(helloWorldShapeId);
+      };
+    }
+    
+  }, [count]);
 
   return (
-    <div style={{ position: "fixed", width: "50vh", height: "50vh" }}>
-       <h2>Timeline</h2>
-      <input
-        type="number"
-        placeholder="Enter number of items"
-        onChange={(e) => setItemCount(Number(e.target.value))}
-        style={{ marginBottom: "20px", padding: "10px", width: "200px" }}
-      />
-      <button onClick={() => handleGenerate(itemCount)}>Generate</button>
+    <div style={{ position: "fixed", width: "100%", height: "100%" }}>
       <Tldraw
         hideUi={true}
         onMount={(editor) => {
+          editorRef.current = editor;
+          console.log("Initial items to generate:", count);
+
           const helloWorldShapeId = createShapeId();
-          editor.createShape({
-            id: helloWorldShapeId,
-            type: "text",
-            x: 200,
-            y: 200,
-            props: {
-              text: "Hello world!",
-            },
-          });
 
           return () => {
             editor.deleteShape(helloWorldShapeId);
