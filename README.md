@@ -35,6 +35,10 @@ Your task is to create a timeline component using TLDraw, similar to the one fou
 - **Generate Button**: A button that triggers the timeline generation based on the input value.
 - **Toggle Visibility**: The sidebar can be shown or hidden using a button in the navbar.
 
+## Challenges
+- Identification of valid components used in Tldraw based on current version. Took time to go through the documentation but was worth it!
+- The useState that keeps the count of timelines is used in app.tsx to transports count from sidebar to tldrawComponent.tsx but the changes didnt render on tldraw. reason was in React, when a state (like count) updates, the component re-renders. During this re-render, the entire function component runs again. However, functions or values that are set during initial render or in lifecycle methods like onMount are not automatically updated with each re-render unless they are explicitly re-triggered. so for this had to use useRef which triggers change in onMount.
+
 ## Usage
 
 ### Getting Started
