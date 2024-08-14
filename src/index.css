@@ -73,7 +73,6 @@ body {
   font-weight: 100;
 }
 
-/* Toggle Sidebar Button for Small Screens */
 .toggleSidebarButtonSmall {
   display: none;
   background-color: transparent;
@@ -139,10 +138,10 @@ body {
 .sidebar textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc; /* Light grey border */
-  border-radius: 4px; /* Rounded corners */
-  box-shadow: none; /* Remove default browser shadow */
-  outline: none; /* Remove default outline */
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-shadow: none; 
+  outline: none; 
   font-size: 1rem;
 }
 
@@ -178,7 +177,7 @@ body {
   cursor: pointer;
 }
 
-/* TldrawComponent styles */
+/* TldrawComponent  */
 .tldraw-container {
   flex: 1;
   padding: 20px;
