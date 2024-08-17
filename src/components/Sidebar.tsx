@@ -1,28 +1,36 @@
 import React, { useState } from "react";
-import "../index.css"; 
 
 interface SidebarProps {
-  onGenerate: (count: number) => void;
-  itemCount: number; 
+  onGenerate: (prompt: string) => void;
+  isLoading: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onGenerate, itemCount }) => {
-  const [inputValue, setInputValue] = useState<number>(itemCount);
+const Sidebar: React.FC<SidebarProps> = ({ onGenerate, isLoading }) => {
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleGenerate = () => {
+    if (inputValue.trim()) {
+      onGenerate(inputValue.trim());
+    }
+  };
 
   return (
     <aside className="sidebar">
       <div>
-        <p>Timeline</p>
-        <input
-          type="number"
-          placeholder="Enter number of items"
+        <p>Generate Flowchart</p>
+        <textarea
+          placeholder="Enter prompt for flowchart generation"
           value={inputValue}
-          min={0}
-          onChange={(e) => setInputValue(Math.max(0, Number(e.target.value)))}
-          style={{ marginBottom: "0.8rem", padding: "10px", borderRadius: '5px'}}
+          onChange={(e) => setInputValue(e.target.value)}
+          style={{ marginBottom: "0.8rem", padding: "10px", borderRadius: '5px', width: '100%', height: '100px' }}
         />
-        <button className="sideBarButton" style={{ width: '100%' }} onClick={() => onGenerate(inputValue)}>
-          Generate
+        <button 
+          className="sideBarButton" 
+          style={{ width: '100%' }} 
+          onClick={handleGenerate}
+          disabled={isLoading}
+        >
+          {isLoading ? "Generating..." : "Generate"}
         </button>
       </div>
     </aside>
@@ -30,9 +38,3 @@ const Sidebar: React.FC<SidebarProps> = ({ onGenerate, itemCount }) => {
 };
 
 export default Sidebar;
-
-
-
-
-
-
