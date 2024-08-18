@@ -20,7 +20,7 @@ export function parseContextToFlowchartElements(context: string): FlowchartEleme
   let components: FlowchartElement[] = []; 
   let texts: FlowchartElement[] = []; 
 
-  lines.forEach((line, index) => {
+  lines.forEach((line) => {
     if (line.includes('**Component Type**:')) {
       if (components.length > 0) {
         componentCount++;

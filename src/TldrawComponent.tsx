@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Tldraw, createShapeId, Editor, TLShapeId } from "tldraw";
+import { useEffect, useRef, useState } from "react";
+import { Tldraw, createShapeId, Editor } from "tldraw";
 import "tldraw/tldraw.css";
 import { parseContextToFlowchartElements, FlowchartElement } from "./utils/flowchartParser";
 
