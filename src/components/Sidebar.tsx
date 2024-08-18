@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { FaRedo } from "react-icons/fa"; 
 
 interface SidebarProps {
   onGenerate: (prompt: string) => void;
+  onRegenerate: () => void;
   isLoading: boolean;
+  canRegenerate: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onGenerate, isLoading }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onGenerate, onRegenerate, isLoading, canRegenerate }) => {
   const [inputValue, setInputValue] = useState<string>("");
+  const [isRegenerating, setIsRegenerating] = useState<boolean>(false); 
 
   const handleGenerate = () => {
     if (inputValue.trim()) {
@@ -14,24 +18,47 @@ const Sidebar: React.FC<SidebarProps> = ({ onGenerate, isLoading }) => {
     }
   };
 
+  const handleRegenerate = () => {
+    setIsRegenerating(true); 
+    onRegenerate(); 
+  };
+
   return (
     <aside className="sidebar">
-      <div>
-        <p>Generate Flowchart</p>
+      <div className="form-group">
+        <h2>Create Flowchart</h2>
+        <label htmlFor="rawContent">Raw content</label>
         <textarea
-          placeholder="Enter prompt for flowchart generation"
+          id="rawContent"
+          placeholder="Add your raw content here"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          style={{ marginBottom: "0.8rem", padding: "10px", borderRadius: '5px', width: '100%', height: '100px' }}
+          maxLength={5000}
+          style={{ marginBottom: "1rem", width: "93%", height: '100px' }}
         />
+        <div style={{display:'flex', flexDirection:'row', alignItems: 'center', justifyContent: 'space-between'}}>
+        
+        <div className="char-count">{inputValue.length}/5000 characters (min 50 characters)</div>
+        {canRegenerate && (
+          <button 
+            className="iconButton" 
+            onClick={handleRegenerate} 
+            disabled={isLoading}
+          >
+            <FaRedo size={15} />
+          </button>
+        )}
+        </div>
+
         <button 
           className="sideBarButton" 
-          style={{ width: '100%' }} 
           onClick={handleGenerate}
           disabled={isLoading}
+          style={{ width: "100%" }}
         >
-          {isLoading ? "Generating..." : "Generate"}
+          {isLoading ? (isRegenerating ? "Regenerating..." : "Generating...") : "Generate"}
         </button>
+        
       </div>
     </aside>
   );

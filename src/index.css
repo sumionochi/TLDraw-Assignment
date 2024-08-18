@@ -106,12 +106,12 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 300px;
-  padding: 1rem;
-  padding-top: 4.5rem;
-  background-color: #f9f9f9;
+  width: 320px;
+  padding: 2rem;
+  padding-top: 4rem;
+  background-color: #fff;
   border-left: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -123,31 +123,43 @@ body {
   z-index: 10;
 }
 
-.sidebar div{
+.form-group {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   width: 100%;
 }
 
-.sidebar div p {
-  margin-bottom: 10px;
-  font-size: large;
+.form-group h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.sidebar textarea {
+.form-group label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-group textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-  box-shadow: none; 
-  outline: none; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: none;
+  outline: none;
   font-size: 1rem;
+  resize: none;
+}
+
+.form-group .char-count {
+  font-size: 0.875rem;
+  color: #666;
+  text-align: right;
 }
 
 .sideBarButton {
-  margin-right: 1rem;
   padding: 0.7rem 1rem;
+  margin-top: 1rem;
   background-color: rgb(149,135,233);
   color: white;
   border: none;
@@ -161,6 +173,7 @@ body {
 .sideBarButton:hover {
   background-color: rgb(116, 105, 177);
 }
+
 
 .options label {
   display: block;
@@ -189,4 +202,21 @@ body {
   height: calc(100% - 40px);
   border: 1px solid #ddd;
   background-color: #fff;
+}
+
+/*reload*/
+.iconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.iconButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }

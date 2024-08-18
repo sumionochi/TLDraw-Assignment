@@ -11,22 +11,22 @@ export function parseContextToFlowchartElements(context: string): FlowchartEleme
   const elements: FlowchartElement[] = [];
   const lines = context.split('\n').map(line => line.trim()).filter(line => line !== '');
 
-  let y = 100; // Initial y-coordinate
-  const x = 100; // x-coordinate for all elements
-  const componentSpacing = 220; // Vertical space between components
-  const textOffsetX = 250; // Offset for text labels along the x-axis
-  const lineHeight = 160; // Height of the connecting lines
-  let currentComponent: Partial<FlowchartElement> = {};
+  let y = 100; 
+  const x = 100; 
+  const componentSpacing = 220; 
+  const textOffsetX = 250; 
+  const lineHeight = 160; 
   let componentCount = 0;
+  let components: FlowchartElement[] = []; 
+  let texts: FlowchartElement[] = []; 
 
   lines.forEach((line, index) => {
     if (line.includes('**Component Type**:')) {
-      if (Object.keys(currentComponent).length > 0) {
-        elements.push(currentComponent as FlowchartElement);
+      if (components.length > 0) {
         componentCount++;
-        y += componentSpacing; // Add spacing after each component
+        y += componentSpacing; 
       }
-      currentComponent = {
+      components.push({
         type: 'geo',
         x: x,
         y: y,
@@ -37,32 +37,36 @@ export function parseContextToFlowchartElements(context: string): FlowchartEleme
           fill: 'solid',
           color: 'black',
         }
-      };
+      });
     } else if (line.includes('**Text**:')) {
       const text = line.split('**Text**:')[1].trim();
-      currentComponent.props = {
-        ...currentComponent.props,
-        text: text
-      };
-      elements.push({
-        type: 'text',
-        x: x + textOffsetX, // Offset text to the right of the rectangle
-        y: y + 10, // Slightly lower to center vertically
-        props: {
-          text: text,
-          size: 'm',
-          font: 'draw',
-        }
-      });
+      const [title, description] = text.split(':').map(part => part.trim());
+
+      if (components.length > 0) {
+        components[components.length - 1].props.text = title; 
+        texts.push({
+          type: 'text',
+          x: x + textOffsetX, 
+          y: y + 10, 
+          props: {
+            text: description,
+            size: 'm',
+            font: 'draw',
+          }
+        });
+      }
     }
   });
 
-  if (Object.keys(currentComponent).length > 0) {
-    elements.push(currentComponent as FlowchartElement);
+  // Filtering out any undefined or incomplete components
+  components = components.filter(component => component.props && component.props.text);
+  texts = texts.filter(text => text.props && text.props.text);
+
+  if (components.length > 0) {
     componentCount++;
   }
 
-  // Explicitly add n-1 lines
+  // Explicitly added n-1 lines
   for (let i = 1; i < componentCount; i++) {
     elements.push({
       type: 'geo',
@@ -70,13 +74,16 @@ export function parseContextToFlowchartElements(context: string): FlowchartEleme
       y: 100 + (i - 1) * componentSpacing + 60,
       props: {
         geo: 'rectangle',
-        w: 2, // Thin width for vertical line
-        h: lineHeight, // Height of the line for better visibility
+        w: 2, 
+        h: lineHeight, 
         fill: 'solid',
         color: 'black',
       },
     });
   }
+
+  elements.push(...components);
+  elements.push(...texts);
 
   return elements;
 }

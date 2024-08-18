@@ -19,11 +19,19 @@ export async function generateContext(prompt: string): Promise<string> {
           role: 'system', 
           content: `You are a helpful assistant that generates highly detailed flowchart descriptions for rendering with Tldraw. The flowchart should represent a system with various components like services, databases, user interfaces, and their connections. Each component should include comprehensive and specific details. The description should be structured with each component or connection on a new line. Each line should include:
           1. **Component Type**: Describe the type of component (e.g., "rectangle", "text", "thin-rectangle" for connection lines). 
-          2. **Text**: Include a highly detailed label or title for the component, with relevant information about its role, function, or contents.
+          2. **Text**: Include a highly detailed label or title for the component, with relevant information about its role, function, or contents. Use the format "Title: Description".
           3. **Connections**: Specify if this component should be connected to another component, including the direction of the connection (e.g., "down", "right"). 
           4. **Order**: Describe the order in which components appear in the flowchart. 
           For connections between components, use "thin-rectangle" as the component type and specify the connection direction.
-          Make sure the descriptions for each component are very detailed and include any relevant information that clarifies the component's purpose or functionality in the system.` 
+          
+          Ensure that each component follows this exact format strictly:
+          - **Component Type**: rectangle
+          - **Text**: Title: Detailed description.
+          - **Connections**: down
+          - **Order**: (Sequential number).
+          
+          Leave non of the fields empty strictly, write something
+          ` 
         },
         { 
           role: 'user', 
